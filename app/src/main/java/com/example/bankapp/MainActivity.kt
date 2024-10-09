@@ -51,11 +51,11 @@ fun HomeScreen() {
                 .padding(padding)
             ) {
 
-        }
        WalletSession()
-//       CardSession()
+       CardSession()
         Spacer(modifier = Modifier.height(16.dp))
-//       FinanceSession()
+        }
+       FinanceSession()
 //       CurrenciesSession()
     }
 }
