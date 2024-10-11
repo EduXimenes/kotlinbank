@@ -54,9 +54,10 @@ fun HomeScreen() {
        WalletSession()
        CardSession()
         Spacer(modifier = Modifier.height(16.dp))
-        }
+
        FinanceSession()
 //       CurrenciesSession()
+        }
     }
 }
 
