@@ -1,121 +1,127 @@
 package com.example.bankapp
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.StarHalf
+import androidx.compose.material.icons.rounded.MonetizationOn
+import androidx.compose.material.icons.rounded.StarHalf
+import androidx.compose.material.icons.rounded.Wallet
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.bankapp.ui.data.FinanceCard
+import com.example.bankapp.ui.theme.BlueStart
 import com.example.bankapp.ui.theme.OrangeEnd
 import com.example.bankapp.ui.theme.OrangeStart
 import com.example.bankapp.ui.theme.PurpleGrey40
 import com.example.bankapp.ui.theme.PurpleGrey80
+import com.example.bankapp.ui.theme.PurpleStart
 
 val financeItems = listOf(
     FinanceCard(
+        icon = Icons.AutoMirrored.Rounded.StarHalf,
         cardName = "Business",
-        cardDescription = "My Business",
-        color = GradientCard(PurpleGrey40, PurpleGrey80)
+        cardDescription = "My\nBusiness",
+        iconBackground = OrangeStart
     ),
     FinanceCard(
+        icon = Icons.Rounded.Wallet,
         cardName = "Wallet",
-        cardDescription = "My Wallet",
-        color = GradientCard(PurpleGrey40, PurpleGrey80)
+        cardDescription = "My\nWallet",
+        iconBackground = BlueStart
     ),
     FinanceCard(
+        icon = Icons.AutoMirrored.Rounded.StarHalf,
         cardName = "Analysis",
-        cardDescription = "Finance Analysis",
-        color = GradientCard(PurpleGrey40, PurpleGrey80)
+        cardDescription = "Finance\nAnalysis",
+        iconBackground = PurpleStart
+    ),
+    FinanceCard(
+        icon = Icons.Rounded.MonetizationOn,
+        cardName = "Transactions",
+        cardDescription = "My\nTransactions",
+        iconBackground = PurpleStart
     )
 )
 
 @Preview
 @Composable
-fun FinanceSession(){
-    Box(
-        modifier = Modifier.padding(16.dp)
-    ){
-
-        Column(
-            modifier = Modifier
-                .background(color = MaterialTheme.colorScheme.onSecondaryContainer)
-                .clip(RoundedCornerShape(25.dp))
-                .width(125.dp)
-                .height(80.dp)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
-
-        ) {
-            Text(
-                "Finance",
-                fontWeight = FontWeight.Bold
-            )
-            Row(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.onBackground),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                financeItems.forEachIndexed{ index, financeCard ->
-                    FinanceCardItem(financeCard)
-            }
-
+fun FinanceSession() {
+    Column() {
+        Text(
+            text = "FinanceSession",
+            color = MaterialTheme.colorScheme.onBackground,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            modifier = Modifier.padding(16.dp)
+        )
+        LazyRow {
+            items(financeItems.size) { index ->
+                FinanceCardItem(index)
             }
         }
     }
-
 }
 
 @Composable
-fun FinanceCardItem(financeCard: FinanceCard) {
-    // Exemplo de criação do Card com ícone e texto
-    FinanceCard(
-        modifier = Modifier
-            .padding(8.dp)
-            .size(120.dp), // Tamanho do Card
-        shape = RoundedCornerShape(16.dp),
-        elevation = 4.dp,
-        backgroundColor = Color.White
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(brush = Brush.verticalGradient(financeCard.color.colors)),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+fun FinanceCardItem(
+    index: Int
+) {
+    val card = financeItems[index]
+    var lastItemPaddingEnd = 0.dp
+    if (index == financeItems.size - 1) {
+        lastItemPaddingEnd = 16.dp
+    }
+
+        Column(modifier = Modifier
+            .clip(RoundedCornerShape(25.dp))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .size(120.dp)
+            .clickable { }
+            .padding(vertical = 12.dp, horizontal = 16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Exibindo o ícone (se houver) - Aqui você pode trocar por Image/Icon
-            Icon(
-                imageVector = Icons.Default.AccountCircle, // Substitua com o ícone apropriado
-                contentDescription = null,
-                modifier = Modifier.size(40.dp),
-                tint = Color.Gray
-            )
-            // Exibindo o nome do card
+
             Text(
-                text = financeCard.cardName,
-                style = MaterialTheme.typography.body1,
-                color = Color.White
-            )
-            // Exibindo a descrição do card
-            Text(
-                text = financeCard.cardDescription,
-                style = MaterialTheme.typography.body2,
-                color = Color.White
+                card.cardName,
+                color = Color.White,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Bold
             )
         }
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
