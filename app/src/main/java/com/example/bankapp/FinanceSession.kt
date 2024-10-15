@@ -23,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -94,7 +95,8 @@ fun FinanceCardItem(
     if (index == financeItems.size - 1) {
         lastItemPaddingEnd = 16.dp
     }
-
+    Box(modifier = Modifier.padding(start = 16.dp, lastItemPaddingEnd))
+    {
         Column(modifier = Modifier
             .clip(RoundedCornerShape(25.dp))
             .background(MaterialTheme.colorScheme.secondaryContainer)
@@ -103,14 +105,27 @@ fun FinanceCardItem(
             .padding(vertical = 12.dp, horizontal = 16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
+            Box(modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(card.iconBackground)
+                    .padding(6.dp)
+                ){
 
+                Icon(
+                    imageVector = card.icon,
+                    contentDescription = card.cardName,
+                    modifier = Modifier.size(32.dp),
+                    tint = Color.White
+                )
+            }
             Text(
-                card.cardName,
-                color = Color.White,
-                fontSize = 17.sp,
-                fontWeight = FontWeight.Bold
+                card.cardDescription,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.SemiBold
             )
         }
+    }
 }
 
 
