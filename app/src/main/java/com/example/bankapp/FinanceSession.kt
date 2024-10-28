@@ -95,35 +95,37 @@ fun FinanceCardItem(
     if (index == financeItems.size - 1) {
         lastItemPaddingEnd = 16.dp
     }
-    Box(modifier = Modifier.padding(start = 16.dp, lastItemPaddingEnd))
-    {
-        Column(modifier = Modifier
-            .clip(RoundedCornerShape(25.dp))
-            .background(MaterialTheme.colorScheme.secondaryContainer)
-            .size(120.dp)
-            .clickable { }
-            .padding(vertical = 12.dp, horizontal = 16.dp),
+    Box(modifier = Modifier.padding(start = 16.dp, end = lastItemPaddingEnd)) {
+        Column(
+            modifier = Modifier
+                .clip(RoundedCornerShape(25.dp))
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .size(120.dp)
+                .clickable {}
+                .padding(13.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Box(modifier = Modifier
-                    .clip(RoundedCornerShape(10.dp))
+
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(16.dp))
                     .background(card.iconBackground)
                     .padding(6.dp)
-                ){
-
+            ) {
                 Icon(
                     imageVector = card.icon,
-                    contentDescription = card.cardName,
-                    modifier = Modifier.size(32.dp),
+                    contentDescription = card.cardDescription,
                     tint = Color.White
                 )
             }
+
             Text(
-                card.cardDescription,
+                text = card.cardName,
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 15.sp
             )
+
         }
     }
 }
